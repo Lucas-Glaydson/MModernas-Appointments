@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:16-alpine  # Versão estável e leve
+    container_name: postgres-local
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_DB}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"  # Porta host:container
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persistência de dados
+
+volumes:
+  postgres_data:
+    driver: local
