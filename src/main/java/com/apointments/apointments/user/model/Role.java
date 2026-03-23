@@ -1,5 +1,8 @@
 package com.apointments.apointments.user.model;
 
+import lombok.Getter;
+
+@Getter
 public enum Role {
     ADMIN("admin"),
     CLIENT("client"),
@@ -9,9 +12,5 @@ public enum Role {
 
     Role(String role){
         this.role = role;
-    }
-
-    public String getRole(){
-        return role;
     }
 }
