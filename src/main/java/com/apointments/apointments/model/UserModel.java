@@ -4,6 +4,7 @@ import com.apointments.apointments.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Table(name = "users")
@@ -25,7 +26,7 @@ public class UserModel {
     @Column(name = "password_hashed")
     private String passwordHashed;
     private String cpf;
-    private String birthday;
+    private Date birthday;
     @Column(name = "phone_number")
     private String phoneNumber;
     @Enumerated(EnumType.STRING)
