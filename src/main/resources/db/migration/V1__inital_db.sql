@@ -2,12 +2,13 @@ CREATE TABLE "users"(
     "id" UUID NOT NULL,
     "first_name" VARCHAR(255) NOT NULL,
     "last_name" VARCHAR(255) NOT NULL,
-    "cpf" VARCHAR(255) NOT NULL,
     "email" VARCHAR(255) NOT NULL,
     "password_hashed" VARCHAR(255) NOT NULL,
+    "cpf" VARCHAR(255) NOT NULL,
+    "birthday" DATE NOT NULL,
     "phone_number" VARCHAR(255) NOT NULL,
     "role" VARCHAR(255) CHECK
-    ("role" IN('')) NOT NULL
+    ("role" IN('ADMIN', 'CLIENT', 'EMPLOYEE')) NOT NULL
 );
 
 ALTER TABLE
@@ -20,7 +21,7 @@ CREATE TABLE "appointments"(
     "employer_id" UUID NOT NULL,
     "service_id" UUID NOT NULL,
     "status" VARCHAR(255) CHECK
-    ("status" IN('')) NOT NULL
+    ("status" IN('PENDING', 'CONFIRMED', 'CANCELLED')) NOT NULL
 );
 
 ALTER TABLE
@@ -69,7 +70,7 @@ CREATE TABLE "payments"(
     "service_id" UUID NOT NULL,
     "appointments_id" UUID NOT NULL,
     "status" VARCHAR(255) CHECK
-    ("status" IN('')) NOT NULL,
+    ("status" IN('PENDING', 'CONFIRMED', 'CANCELLED')) NOT NULL,
     "total" FLOAT(53) NOT NULL,
     "timestamp" DATE NOT NULL
 );
@@ -81,7 +82,7 @@ CREATE TABLE "payment_type"(
     "id" UUID NOT NULL,
     "payment_id" UUID NOT NULL,
     "payment_type" VARCHAR(255) CHECK
-    ("payment_type" IN('')) NOT NULL
+    ("payment_type" IN('CREDIT', 'DEBIT', 'MONEY', 'PIX')) NOT NULL
 );
 
 ALTER TABLE "payment_type" ADD PRIMARY KEY("id");
