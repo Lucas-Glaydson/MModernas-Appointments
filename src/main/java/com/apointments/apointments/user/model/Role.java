@@ -1,4 +1,4 @@
-package com.apointments.apointments.model.enums;
+package com.apointments.apointments.user.model;
 
 public enum Role {
     ADMIN("admin"),

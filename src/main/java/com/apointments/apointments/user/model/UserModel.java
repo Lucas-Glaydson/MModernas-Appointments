@@ -1,6 +1,5 @@
-package com.apointments.apointments.model;
+package com.apointments.apointments.user.model;
 
-import com.apointments.apointments.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
