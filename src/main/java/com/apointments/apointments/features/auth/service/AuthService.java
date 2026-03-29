@@ -1,6 +1,9 @@
 package com.apointments.apointments.features.auth.service;
 
+import com.apointments.apointments.exception.user.CpfAlreadyExistsException;
+import com.apointments.apointments.exception.user.EmailAlreadyExistsException;
 import com.apointments.apointments.features.auth.dto.CreateUserRequest;
+import com.apointments.apointments.features.auth.dto.UserResponse;
 import com.apointments.apointments.features.auth.service.interfaces.IAuthService;
 import com.apointments.apointments.features.user.factory.UserFactory;
 import com.apointments.apointments.features.user.mapper.UserMapper;
@@ -25,13 +28,17 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public void register(CreateUserRequest userRequest) {
-        UserModel newUser = mapper.toModel(userRequest);
-
+    public UserResponse register(CreateUserRequest userRequest) {
         String passwordHashed = passwordEncoder.encode(userRequest.password());
 
-        newUser = factory.create(newUser, passwordHashed, Role.CLIENT);
+        if(userRepository.findOneByEmail(userRequest.email()) != null)
+            throw new EmailAlreadyExistsException(userRequest.email());
 
-        userRepository.save(newUser);
+        if(userRepository.findOneByCpf(userRequest.cpf()) != null)
+            throw new CpfAlreadyExistsException(userRequest.cpf());
+
+        UserModel newUser = factory.create(mapper.toModel(userRequest), passwordHashed, Role.CLIENT);
+
+        return mapper.modelToResponse(userRepository.save(newUser));
     }
 }
