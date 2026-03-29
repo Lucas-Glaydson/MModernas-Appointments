@@ -1,4 +1,4 @@
-package com.apointments.apointments.user.model;
+package com.apointments.apointments.features.user.model;
 
 import jakarta.persistence.*;
 import lombok.*;
