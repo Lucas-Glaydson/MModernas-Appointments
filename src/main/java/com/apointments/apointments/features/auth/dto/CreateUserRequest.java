@@ -25,7 +25,7 @@ public record CreateUserRequest(
 
         Date birthday,
 
-        @Min(11) //Format with country code such +55
+        @Min(11) //Format with country code such +55 81 9 0000-0000
         String phoneNumber
 ) {
 
